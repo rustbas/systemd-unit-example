@@ -1,8 +1,23 @@
 #!/bin/bash
 
-set -xe
+set -e
 
-PROCESS_NAME='emacs'
+PROCESS_NAME="$1"
 PROCESS_PID=`pgrep --newest ${PROCESS_NAME}`
+PID_FILE="$1.pid"
 
+LOG_FILE="monitoring.log"
+
+if [ -n "${PROCESS_NAME}" ]; then
+    if [ -f $PID_FILE ]; then
+	PREVIOUS_PID=`cat $PID_FILE`
+	if [ $PROCESS_PID != $PREVIOUS_PID ]; then
+	    echo "Процесс $PROCESS_NAME был перезапущен с PID=$PROCESS_PID" | tee -a $LOG_FILE
+	fi
+    fi
+    echo ${PROCESS_PID} > $PID_FILE
+    
+    # There will be request
+    echo "Процесс $PROCESS_NAME с PID=$PROCESS_PID работает" | tee -a $LOG_FILE
+fi
 
