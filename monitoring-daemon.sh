@@ -8,6 +8,12 @@ PID_FILE="$1.pid"
 
 LOG_FILE="monitoring.log"
 
+ENDPOINT="https://test.com/monitoring/test/api"
+ENDPOINT="https://putsreq.com/kKddZBA0faGk0Lan61uy"
+
+CURL="curl"
+CURL_OPTS="-i -X POST --max-time 2 -s" # -w \"%{http_code}\""
+
 if [ -n "${PROCESS_NAME}" ]; then
     if [ -f $PID_FILE ]; then
 	PREVIOUS_PID=`cat $PID_FILE`
@@ -19,5 +25,9 @@ if [ -n "${PROCESS_NAME}" ]; then
     
     # There will be request
     echo "Процесс $PROCESS_NAME с PID=$PROCESS_PID работает" | tee -a $LOG_FILE
+    # exec "$CURL_COMMAND"
+    response=`$CURL $CURL_OPTS -d "name=Pablo" $ENDPOINT`
+    echo $response
+    echo $CURL_COMMAND
 fi
 
