@@ -15,6 +15,19 @@ CURL="curl"
 CURL_OPTS="-i -o /dev/null -X POST --max-time 2 -s -w %{http_code}"
 CURL_MSG="name=$PROCESS_NAME&pid=$PROCESS_PID&date=$DATE"
 
+while getopts ":p:e:" opt; do
+    case $opt in
+	p)
+	    echo "Using PROCESS_NAME=$opt"
+	    ;;
+	e)
+	    echo "Using ENDPOINT=$opt"
+	    ;;
+	\?)
+	    echo "Invalid option: $opt"
+    esac
+done
+
 if [ -n "${PROCESS_NAME}" ]; then
     if [ -f $PID_FILE ]; then
 	PREVIOUS_PID=`cat $PID_FILE`
