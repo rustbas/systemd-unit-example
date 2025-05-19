@@ -3,3 +3,4 @@
 *.mp4
 *.pid
 *.log
+/monitoring.service
