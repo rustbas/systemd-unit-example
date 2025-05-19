@@ -41,10 +41,7 @@ sed -i -e "s|ENDPOINT|$ENDPOINT|g" -e "s|PROCESS_NAME|$PROCESS_NAME|g" monitorin
 
 cp monitoring.service monitoring.timer /etc/systemd/system
 cp monitoring /usr/bin/monitoring
+rm monitoring.service monitoring.timer
 
 systemctl daemon-reload
 systemctl enable --now monitoring.timer
-systemctl status monitoring.timer
-systemctl status monitoring.service
-
-exit 0
