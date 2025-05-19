@@ -40,7 +40,7 @@ PID_FILE="/var/run/$PROCESS_NAME.pid"
 
 DATE=`date +%Y-%m-%dT%H:%M:%S`
 
-# LOG_FILE="monitoring.log"
+LOG_FILE="/var/log/monitoring.log"
 
 CURL="curl"
 CURL_OPTS="-i -o /dev/null -X POST --max-time 2 -s -w %{http_code}"
@@ -50,14 +50,15 @@ if [ -n "${PROCESS_PID}" ]; then
     if [ -f $PID_FILE ]; then
 	PREVIOUS_PID=`cat $PID_FILE`
 	if [ $PROCESS_PID != $PREVIOUS_PID ]; then
-	    echo "Процесс $PROCESS_NAME был перезапущен с PID=$PROCESS_PID. Date: $DATE" #| tee -a $LOG_FILE
+	    echo "Процесс $PROCESS_NAME был перезапущен с PID=$PROCESS_PID. Date: $DATE" | tee -a $LOG_FILE
 	fi
     fi
     echo ${PROCESS_PID} > $PID_FILE
     response=`$CURL $CURL_OPTS -d "$CURL_MSG" $ENDPOINT`
     if [ $? -ne 0 ] || [ "$response" != "200" ]; then
 	MSG="Сервер $ENDPOINT не доступен. HTTP_CODE=$response"
-	echo $MSG #| tee -a $LOG_FILE
+	echo $MSG | tee -a $LOG_FILE
     fi
-    # [ -f $PID_FILE ] && rm $PID_FILE
+else
+    [ -f $PID_FILE ] && rm $PID_FILE
 fi
