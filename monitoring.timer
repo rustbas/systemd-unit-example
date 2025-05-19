@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer for test unit
+
+[Timer]
+OnUnitActiveSec=10s
+OnBootSec=10s
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target

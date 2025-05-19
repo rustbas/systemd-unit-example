@@ -1,0 +1,10 @@
+[Unit]
+Description=Service for monitoring process and sending info to API
+
+[Service]
+Type=oneshot
+ExecStart=bash /usr/bin/monitoring -p PROCESS_NAME -e ENDPOINT
+StartLimitBurst=10
+
+[Install]
+WantedBy=multi-user.target
