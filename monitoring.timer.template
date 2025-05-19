@@ -2,7 +2,7 @@
 Description=Timer for test unit
 
 [Timer]
-OnUnitActiveSec=10s
+OnUnitActiveSec=5min
 OnBootSec=10s
 AccuracySec=1s
 

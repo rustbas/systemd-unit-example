@@ -35,6 +35,7 @@ fi
 
 set -xe
 
+cp monitoring.timer.template monitoring.timer
 cp monitoring.service.template monitoring.service
 sed -i -e "s|ENDPOINT|$ENDPOINT|g" -e "s|PROCESS_NAME|$PROCESS_NAME|g" monitoring.service
 
