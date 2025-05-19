@@ -57,7 +57,7 @@ if [ -n "${PROCESS_PID}" ]; then
 	fi
     fi
     echo ${PROCESS_PID} > $PID_FILE
-        response=`$CURL $CURL_OPTS -d "$CURL_MSG" $ENDPOINT`
+    response=`$CURL $CURL_OPTS -d "$CURL_MSG" $ENDPOINT`
     if [ $? -ne 0 ] || [ "$response" != "200" ]; then
 	MSG="Сервер $ENDPOINT не доступен. HTTP_CODE=$response"
 	echo $MSG | tee -a $LOG_FILE
