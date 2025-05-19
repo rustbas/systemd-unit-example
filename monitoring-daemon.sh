@@ -1,7 +1,8 @@
 #!/bin/bash
 
 USAGE_MSG="""\
-Usage: $0 -p [PROCESS NAME] -e [ENDPOINT]"""
+Usage: $0 -p [PROCESS NAME] -e [ENDPOINT]\
+"""
 
 while getopts "hp:e:" OPT; do
     case $OPT in
