@@ -6,22 +6,22 @@ Usage: $0 -p [PROCESS NAME] -e [ENDPOINT]\
 
 while getopts "hp:e:" OPT; do
     case $OPT in
-	p)
-	    echo "Using PROCESS_NAME=$OPTARG"
-	    PROCESS_NAME="$OPTARG"
-	    ;;
-	e)
-	    echo "Using ENDPOINT=$OPTARG"
-	    ENDPOINT="$OPTARG"
-	    ;;
-	h)
-	    echo "$USAGE_MSG"
-	    exit 0
-	    ;;
-	\?)
-	    echo "Invalid option: $OPT"
-	    echo "$USAGE_MSG"
-	    exit 1
+    p)
+        echo "Using PROCESS_NAME=$OPTARG"
+        PROCESS_NAME="$OPTARG"
+        ;;
+    e)
+        echo "Using ENDPOINT=$OPTARG"
+        ENDPOINT="$OPTARG"
+        ;;
+    h)
+        echo "$USAGE_MSG"
+        exit 0
+        ;;
+    \?)
+        echo "Invalid option: $OPT"
+        echo "$USAGE_MSG"
+        exit 1
     esac
 done
 
