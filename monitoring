@@ -46,6 +46,16 @@ CURL="curl"
 CURL_OPTS="-i -o /dev/null -X POST --max-time 2 --connect-timeout 5 -s -w %{http_code}"
 CURL_MSG="name=$PROCESS_NAME&pid=$PROCESS_PID&date=$DATE"
 
+if [ ! -w "$LOG_FILE" ]; then
+    echo "Can't write to log-file: \"$LOG_FILE\". Check permissions."
+    exit 1
+fi
+
+if [ ! -w "$PID_FILE" ]; then
+    echo "Can't write to pid-file: \"$PID_FILE\". Check permissions."
+    exit 1
+fi
+
 if [ -n "${PROCESS_PID}" ]; then
     if [ -f $PID_FILE ]; then
         PREVIOUS_PID=`cat $PID_FILE`
